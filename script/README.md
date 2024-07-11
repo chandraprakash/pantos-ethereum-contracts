@@ -109,3 +109,8 @@ $ forge script ./script/redeploy/RedeployHubAndForwarder.s.sol --account local_d
 ```bash
 $ forge script ./script/redeploy/UpgradeHubAndRedeployForwarder.s.sol --account local_deployer --password '' --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --rpc-url local-8545 -vvvv --sig "run(address)" 0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512
 ```
+
+
+```bash
+$ forge script ./script/DeploySafe.s.sol --account local_deployer --password '' --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --rpc-url local-8545 -vvvv --sig "run()"
+```
