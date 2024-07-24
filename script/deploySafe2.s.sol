@@ -97,18 +97,34 @@ contract DeploySafe is Script {
         );
 
         console2.logBytes32(txHash);
+        vm.stopBroadcast();
+        
+        // This snippet should exist on separate script or web interface 
+        // approve the transaction hash on chain by individual signers
+        for (uint256 i = 0; i < threshold; i++) {
+            vm.broadcast(privateKeys[i]);
+            safe.approveHash(txHash);
+        }
+        
+        // Normal flow resummes, any deployer with some gas balance can execute the transaction
+        // the hashes are already approved on chain at this time.
 
-        // Sign the transaction 
+        vm.startBroadcast();
         bytes memory collectedSignatures;
         for (uint256 i = 0; i < threshold; i++) {
-            (uint8 v, bytes32 r, bytes32 s) = vm.sign(privateKeys[i], txHash);
+            // signature construction revese engineered from checkNSignatures
+            uint8 v = 1;
+            bytes32 r = bytes32(uint256(uint160(owners[i])));
+            bytes32 s = bytes32(0);
             bytes memory signature = abi.encodePacked(r, s, v);
             collectedSignatures = abi.encodePacked(collectedSignatures, signature);
         }
 
         console2.logBytes(collectedSignatures);
 
+
         // Execute the transaction
+ 
         bool success = safe.execTransaction(
             address(testNft),
             value,
