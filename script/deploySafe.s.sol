@@ -16,16 +16,17 @@ contract DeploySafe is Script {
     address PROXY_FACTORY;
     address MULTISEND;
 
-    
     uint256 public threshold = 2;
     mapping(address => bytes) public signatures;
 
-    address[] public owners = [  // ANVIL's default accounts in ascending order
+    address[] public owners = [
+        // ANVIL's default accounts in ascending order
         0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, // 0x3c44...
         0x70997970C51812dc3A010C7d01b50e0d17dc79C8, // 0x70...
-        0x90F79bf6EB2c4f870365E785982E1f101E93b906  // 0x90...
+        0x90F79bf6EB2c4f870365E785982E1f101E93b906 // 0x90...
     ];
-    uint256[] private privateKeys = [ // ANVIL's default accounts private keys
+    uint256[] private privateKeys = [
+        // ANVIL's default accounts private keys
         0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a,
         0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d,
         0x7c8521182947a0b1ffdcf5e5babd128afdf80fbc5cdacbb0baed1bc56e75a6da
@@ -36,7 +37,10 @@ contract DeploySafe is Script {
 
         // Deploy the Gnosis Safe master copy contract
         Safe gnosisSafe = new Safe();
-        console2.log("Gnosis Safe Master Copy deployed at:", address(gnosisSafe));
+        console2.log(
+            "Gnosis Safe Master Copy deployed at:",
+            address(gnosisSafe)
+        );
         GNOSIS_SAFE_MASTER_COPY = address(gnosisSafe);
 
         // Deploy the Proxy Factory contract
@@ -71,10 +75,16 @@ contract DeploySafe is Script {
         );
 
         address payable safeAddress = payable(address(safeProxy));
-        Safe safe = Safe(safeAddress);  // wrap proxy
+        Safe safe = Safe(safeAddress); // wrap proxy
 
-        require(safe.getOwners().length == owners.length, "Owners not set up correctly");
-        require(safe.getThreshold() == threshold, "Threshold not set correctly");
+        require(
+            safe.getOwners().length == owners.length,
+            "Owners not set up correctly"
+        );
+        require(
+            safe.getThreshold() == threshold,
+            "Threshold not set correctly"
+        );
 
         // Deploy TestNFT and make safe wallet its owner
         TestNFT testNft = new TestNFT(safeAddress);
@@ -82,6 +92,8 @@ contract DeploySafe is Script {
         // Get transaction hash for pausing TestNFT
         uint256 value = 0;
         bytes memory data = abi.encodeWithSignature("pause()");
+
+        console2.logBytes(data);
 
         bytes32 txHash = safe.getTransactionHash(
             address(testNft),
@@ -98,12 +110,15 @@ contract DeploySafe is Script {
 
         console2.logBytes32(txHash);
 
-        // Sign the transaction 
+        // Sign the transaction
         bytes memory collectedSignatures;
         for (uint256 i = 0; i < threshold; i++) {
             (uint8 v, bytes32 r, bytes32 s) = vm.sign(privateKeys[i], txHash);
             bytes memory signature = abi.encodePacked(r, s, v);
-            collectedSignatures = abi.encodePacked(collectedSignatures, signature);
+            collectedSignatures = abi.encodePacked(
+                collectedSignatures,
+                signature
+            );
         }
 
         console2.logBytes(collectedSignatures);

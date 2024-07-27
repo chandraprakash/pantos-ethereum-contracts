@@ -1,14 +1,10 @@
 {
     "domain": {
-        "name": "Gnosis Safe",
-        "version": "1",
-        "chainId": 1,
-        "verifyingContract": "0x0000000000000000000000000000000000000000"
+        "chainId": "0x7a69",
+        "verifyingContract": "0x31486d2483f49d5f506f480b4facb056eefd6c2e"
     },
     "types": {
         "EIP712Domain": [
-            { "name": "name", "type": "string" },
-            { "name": "version", "type": "string" },
             { "name": "chainId", "type": "uint256" },
             { "name": "verifyingContract", "type": "address" }
         ],
@@ -27,9 +23,9 @@
     },
     "primaryType": "SafeTx",
     "message": {
-        "to": "0x0000000000000000000000000000000000000000",
+        "to": "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9",
         "value": 0,
-        "data": "0xa9059cbb",
+        "data": "0x3f4ba83a",
         "operation": 0,
         "safeTxGas": 0,
         "baseGas": 0,

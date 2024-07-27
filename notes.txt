@@ -1,1 +1,34 @@
 cast wallet sign --data --from-file message.json --account local_deployer --password ""
+
+
+
+forge eip712 --help
+Generate EIP-712 struct encodings for structs from a given file
+
+
+
+///
+signature order of ascending of signers
+check checksum if not working
+
+
+
+========
+flow
+========
+1. deploy safe
+forge script ./script/deploySafe.s.sol --account local_deployer --password '' --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266  --rpc-url local-8545 -vvvv --sig "run()"
+
+2. prepare message using foundry simulation 
+//here sender has to be gnosis safe address
+forge script ./script/prepare.s.sol --account local_deployer --password '' --sender 0x31486d2483F49D5f506F480b4facb056EEFd6C2E  --rpc-url local-8545 -vvvv --sig "run()"
+
+3.Construct Eip712 message.json using python or something else
+
+4. Sign the EIP712 message
+
+cast wallet sign --data --from-file message.json --account local_deployer --password ""
+
+5. Send the transaction -- anyone can send it
+forge script ./script/submit.s.sol --account local_deployer --password '' --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266  --rpc-url local-8545 -vvvv --sig "run()"
+
