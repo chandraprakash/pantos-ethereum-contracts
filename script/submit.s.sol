@@ -34,9 +34,15 @@ contract Submit is Script {
 
     bytes[] private signaturesHardcoded = [
         // ANVIL's default accounts private keys
-        bytes(hex"3b24f64a2dfd98576c949d04216aa8306e4ed96a0137dcdcdf5f7d94f883d8682941ab534d5e9b9f7391afdcbf32c4bd1bd3d0e38e3fb9a66d53d4544fb0e2fc1b"),
-        bytes(hex"183a095b5657e5dd2d02ed3e0cb5e4f7d7a3be6708eb8eaec59226cc40c511383ff1f04f0d5f9885453d185f0f11e788db8deeae4af3ac2c9eb1c2c6c9375d5e1b"),
-        bytes(hex"0f3f37c108e0a40bcb659b01d00f979fec772e28afd31bd8d2e1b31ac73e0b3d3b59a5dd6ec93ace2fc940a91ac8c238913360a55e71d56bdb23f82a8c57ea741c")
+        bytes(
+            hex"3b24f64a2dfd98576c949d04216aa8306e4ed96a0137dcdcdf5f7d94f883d8682941ab534d5e9b9f7391afdcbf32c4bd1bd3d0e38e3fb9a66d53d4544fb0e2fc1b"
+        ),
+        bytes(
+            hex"183a095b5657e5dd2d02ed3e0cb5e4f7d7a3be6708eb8eaec59226cc40c511383ff1f04f0d5f9885453d185f0f11e788db8deeae4af3ac2c9eb1c2c6c9375d5e1b"
+        ),
+        bytes(
+            hex"0f3f37c108e0a40bcb659b01d00f979fec772e28afd31bd8d2e1b31ac73e0b3d3b59a5dd6ec93ace2fc940a91ac8c238913360a55e71d56bdb23f82a8c57ea741c"
+        )
     ];
 
     /**

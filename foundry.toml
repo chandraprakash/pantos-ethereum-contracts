@@ -22,6 +22,6 @@ fantom-testnet = "https://api-eu1.tatum.io/v3/blockchain/node/FTM/${TATUM_API_KE
 celo-testnet = "https://api-eu1.tatum.io/v3/blockchain/node/CELO/${TATUM_API_KEY}"
 local-8545 = "http://127.0.0.1:8545"
 local-8546 = "http://127.0.0.1:8546"
-
+sepolia-testnet = "https://api-eu1.tatum.io/v3/blockchain/node/ethereum-sepolia/${TATUM_API_KEY}"
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

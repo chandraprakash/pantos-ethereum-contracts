@@ -19,6 +19,12 @@ contract TestNFT is ERC721, ERC721Pausable, Ownable {
         _unpause();
     }
 
+    function mint(address to, uint256 tokenId) public onlyOwner {
+        super._mint(to, tokenId);
+    }
+
+    
+
     // The following functions are overrides required by Solidity.
 
     function _update(
